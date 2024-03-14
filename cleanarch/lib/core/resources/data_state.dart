@@ -5,6 +5,8 @@ abstract class DataState<T> {
   final DioException? error;
 
   const DataState({this.data, this.error});
+
+  get exception => null;
 }
 
 class DataSuccess<T> extends DataState<T> {

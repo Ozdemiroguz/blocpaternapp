@@ -1,6 +1,14 @@
+import 'package:cleanarchitecture/config/theme/app.themes.dart';
+import 'package:cleanarchitecture/features/daily_news/presentation/bloc/article/remote/remote_article_bloc.dart';
+import 'package:cleanarchitecture/features/daily_news/presentation/bloc/article/remote/remote_article_event.dart';
+import 'package:cleanarchitecture/features/daily_news/presentation/pages/home/daily_news.dart';
+import 'package:cleanarchitecture/injection_container.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'config/theme/app.themes.dart';
 
-void main() {
+void main() async {
+  await initalizeDependencies();
   runApp(const MyApp());
 }
 
@@ -10,39 +18,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.,
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'Flutter Demo',
-      home: MyHomePage(),
-    );
-  }
-}
-
-//MyHomePage widget is the main screen of the app
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Flutter Demo Home Page'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // Add your onPressed code here!
-        },
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+    return BlocProvider<RemoteArticlesBloc>(
+      create: (context) => sl<RemoteArticlesBloc>()..add(const GetArticles()),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        home: const DailyNews(),
+        theme: theme(),
       ),
     );
   }
