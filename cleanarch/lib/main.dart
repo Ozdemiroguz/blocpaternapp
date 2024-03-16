@@ -1,3 +1,4 @@
+import 'package:cleanarchitecture/config/routes/routes.dart';
 import 'package:cleanarchitecture/config/theme/app.themes.dart';
 import 'package:cleanarchitecture/features/daily_news/presentation/bloc/article/remote/remote_article_bloc.dart';
 import 'package:cleanarchitecture/features/daily_news/presentation/bloc/article/remote/remote_article_event.dart';
@@ -5,9 +6,10 @@ import 'package:cleanarchitecture/features/daily_news/presentation/pages/home/da
 import 'package:cleanarchitecture/injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'config/theme/app.themes.dart';
+import 'config/routes/routes.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await initalizeDependencies();
   runApp(const MyApp());
 }
@@ -25,6 +27,7 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         home: const DailyNews(),
         theme: theme(),
+        onGenerateRoute: AppRoutes.onGenerateRoutes,
       ),
     );
   }

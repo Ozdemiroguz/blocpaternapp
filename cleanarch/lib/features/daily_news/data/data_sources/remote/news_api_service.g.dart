@@ -22,14 +22,14 @@ class _NewsApiService implements NewsApiService {
 
   @override
   Future<HttpResponse<List<ArticleModel>>> getNewsArticles({
-    String? country,
     String? apiKey,
+    String? country,
     String? category,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
-      r'country': country,
       r'apiKey': apiKey,
+      r'country': country,
       r'category': category,
     };
     queryParameters.removeWhere((k, v) => v == null);
@@ -52,7 +52,7 @@ class _NewsApiService implements NewsApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    List<ArticleModel> value = _result.data!['articles']
+    List<ArticleModel> value = _result.data!['articles']!
         .map<ArticleModel>(
             (dynamic i) => ArticleModel.fromJson(i as Map<String, dynamic>))
         .toList();
